@@ -1,6 +1,3 @@
-enter_num = True
-massive_x = []
-
 
 class Number:
     def __init__(self, massive):
@@ -14,13 +11,22 @@ class Number:
         return self.output
 
 
-while enter_num:
-    input_num = int(input())
-    if input_num in range(0, 9):
-        massive_x.append(input_num)
-    else:
-        enter_num = False
+def create_massive():
+    massive = []
+    enter_num = True
+    while enter_num:
+        input_num = int(input())
+        if input_num in range(0, 9):
+            massive.append(input_num)
+        else:
+            enter_num = False
+    return massive
+
+
+massive_x = create_massive()
+massive_y = create_massive()
 
 x = Number(massive_x)
+y = Number(massive_y)
 
-print(x.take_number())
+print(x.take_number() - y.take_number())
