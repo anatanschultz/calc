@@ -6,12 +6,12 @@ class Number:
 
     def take_number(self):
         for num, i in enumerate(self.massive):
-            number_dec = i * 10 ** (len(self.massive) - num - 1)
-            self.output += number_dec
+            number_decade = i * 10**(len(self.massive)-(num+1))
+            self.output += number_decade
         return self.output
 
 
-def create_massive():
+def create_massive():       # функция требует изменения на вызов математического действия
     massive = []
     enter_num = True
     while enter_num:
@@ -29,4 +29,4 @@ massive_y = create_massive()
 x = Number(massive_x)
 y = Number(massive_y)
 
-print(x.take_number() - y.take_number())
+print(x.take_number() + y.take_number())
