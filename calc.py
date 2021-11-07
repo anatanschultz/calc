@@ -1,4 +1,5 @@
 import pygame
+pygame.font.init()
 
 mouse_pos = pygame.Rect(-100, -100, 1, 1)
 
@@ -22,12 +23,22 @@ class Button:
         screen.blit(self.surface, self.rect)
         if self.rect.colliderect(pos):
             self.surface.fill((255, 0, 0))
-            print(self.text)
-            pos = pygame.Rect(-100, -100, 1, 1)
+            for num_cell in range(0, 10):
+                if self.text == str(num_cell):
+                    self.text = num_cell
         else:
             self.surface.fill((255, 255, 255))
-        return pos
 
+        f1 = pygame.font.Font(None, 36)
+        text1 = f1.render(str(self.text), True,
+                          (180, 0, 0))
+        screen.blit(text1, self.rect.center)
+
+        if self.rect.colliderect(pos):
+            return self.text
+
+
+number_one = []
 
 key_massive = [7, 8, 9, "+",
                4, 5, 6, "-",
@@ -44,6 +55,7 @@ for num, i in enumerate(key_massive):
 calc_running = True
 
 while calc_running:
+    mouse_pos = pygame.Rect(-100, -100, 1, 1)
     keypress_active = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -57,7 +69,11 @@ while calc_running:
                 keypress_active = True
 
     for i in buttons:
-        mouse_pos = i.visualisation(mouse_pos)
+        new_number = i.visualisation(mouse_pos)
+        if new_number in range(0, 10):
+            number_one.append(new_number)
 
     pygame.display.update()
-    pygame.time.delay(100)
+    pygame.time.delay(50)
+
+print(number_one)
